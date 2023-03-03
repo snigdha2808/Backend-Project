@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Backend Project</title>
+  <style media="screen">
+    body{
+      margin:0;
+      padding-left:10px;
+      }
+    .div1{
+      background-color:#FED049;
+    }
+    .head{
+      margin-top:0;
+      padding:15px;
+      color:black;
+    }
+    .para{
+      color:#fff;
+      font-weight: bolder;
+      padding:15px;
+      font-size: 25px;
+    }
+    .btt{
+      background-color: #10A19D;
+      padding:8px;
+      margin:auto;
+      color:#fff;
+    }
+  </style>
+</head>
+<!-- backend 1st div -->
+<body>
+  <div class="container div1">
+    <h1 class="mb-4 blog head">Blog Articles</h1>
+    <p class="para">Discover Stories, Articles And Research Works From GLA Students</p>
+    <a href="/articles/new" class="btn btn-success btt">New Article</a>
+
+    <% articles.forEach(article => { %>
+      <div class="card mt-4">
+        <div class="card-body">
+          <h4 class="card-title"><%= article.title %></h4>
+          <div class="card-subtitle text-muted mb-2">
+            <%= article.createdAt.toLocaleDateString() %>
+          </div>
+          <div class="card-text mb-2"><%= article.description %></div>
+          <a href="articles/<%= article.slug %>" class="btn btn-primary">Read More</a>
+          <a href="articles/edit/<%= article.id %>" class="btn btn-info">Edit</a>
+          <form action="/articles/<%= article.id %>?_method=DELETE" method="POST" class="d-inline">
+            <button type="submit" class="btn btn-danger">Delete</button>
+          </form>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+</body>
+</html>
